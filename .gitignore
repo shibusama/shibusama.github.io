@@ -1,0 +1,6 @@
+# generated site output (deployed via gh-pages branch, not committed to main)
+public/
+
+# OS junk
+Thumbs.db
+.DS_Store
