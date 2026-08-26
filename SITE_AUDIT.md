@@ -32,8 +32,8 @@
 6. 2002 诗/topic、2012 官宣后：移除指向被删文章的面包屑/上一篇链接
 
 **遗留注意事项**：
-1. `categories/`、`tags/` 为**空壳页**（导航仍引用，删除会导致 107 页导航死链；当前无死链）
-2. 友链数据源 `raw.github.xaox.cc/...friends/example.json` 返回 404（按约定未自动换源，友链页可能加载空白）
+1. ~~`categories/`、`tags/` 空壳页~~ → **已删除**：9 个页面的顶部导航同步移除"分类/标签"入口，无死链（wiki 自己的 `/wiki/tags/` 标签体系不受影响）
+2. **友链数据源实测正常**（盘点时误报）：`raw.github.xaox.cc/xaoxuu/friends/output/v2/data.json` 与 `friends-rss-generator/output/data.json` 均返回 200
 3. 页面内联脚本的 `ctx.services` 映射仍包含已删脚本路径（按需加载，无对应元素不会请求，不影响功能）
 
 ---
