@@ -82,6 +82,20 @@ for (const p of posts) {
   for (const t of p.tags) (tagMap[t] = tagMap[t] || []).push(p);
 }
 
+/* ---------- hero banner (shown on every page) ---------- */
+function hero(pre) {
+  return `<div class="hero">
+  <img class="hero-bg" src="${pre}assets/banner/nebula.jpg" alt="">
+  <div class="halftone-overlay"></div>
+  <span class="hero-deco l"><img src="${pre}assets/pop/starburst.svg" alt=""></span>
+  <span class="hero-deco r"><img src="${pre}assets/pop/tomato.svg" alt=""></span>
+  <div class="hero-inner">
+    <div class="logo2">GEIST</div>
+    <span class="hero-tagline">POP ART BLOG · EST. 2002</span>
+  </div>
+</div>`;
+}
+
 /* ---------- layout ---------- */
 function layout(opts) {
   const { title, body, current, pre } = opts;
@@ -125,6 +139,7 @@ function layout(opts) {
 </header>
 <div class="marquee"><span>★ POP ART BLOG ★ 哲学 ★ 文本分析 ★ 生活 ★ 诗 ★ WIKI ★ LOVE &amp; CAREER ★ 站内搜索在「关于」旁？不，搜索在首页顶部 ★ POP! ★</span></div>
 <main class="container">
+${hero(pre2)}
 ${body}
 </main>
 <footer class="site-footer">
@@ -160,17 +175,7 @@ function genIndex() {
       if (n === i + 1) pag.push(`<span class="cur">${n}</span>`);
       else pag.push(`<a href="${n === 1 ? 'index.html' : 'page' + n + '.html'}">${n}</a>`);
     }
-    const hero = i === 0 ? `<div class="hero">
-  <img class="hero-bg" src="assets/banner/nebula.jpg" alt="">
-  <div class="halftone-overlay"></div>
-  <span class="hero-deco l"><img src="assets/pop/starburst.svg" alt=""></span>
-  <span class="hero-deco r"><img src="assets/pop/tomato.svg" alt=""></span>
-  <div class="hero-inner">
-    <div class="logo2">GEIST</div>
-    <span class="hero-tagline">POP ART BLOG · EST. 2002</span>
-  </div>
-</div>` : '';
-    const body = `${hero}<h1 class="page-title"><span class="starburst">★</span>LATEST POSTS</h1>
+    const body = `<h1 class="page-title"><span class="starburst">★</span>LATEST POSTS</h1>
 <div class="page-desc">共 ${posts.length} 篇 · 第 ${i + 1}/${pages} 页 · 波普能量加载中…</div>
 <div class="post-grid">
 ${cards}
@@ -337,6 +342,14 @@ ${catOpts}
   fs.writeFileSync(path.join(OUT, 'write.html'), html.replace('</body>', '<script src="js/editor.js"></script>\n</body>'), 'utf8');
 }
 
+function genAssets() {
+  // copy build/assets -> public/assets so every committed asset ships with the build
+  const src = path.join(__dirname, 'assets');
+  const dst = path.join(OUT, 'assets');
+  if (fs.existsSync(src)) fs.cpSync(src, dst, { recursive: true });
+  else console.warn('build/assets missing - site images will 404');
+}
+
 function genData() {
   const idx = [...posts, ...wiki].map(p => ({
     t: p.title, u: p.url, d: p.date || '', c: p.category || (p.wikiSection || ''),
@@ -364,12 +377,7 @@ function genManual() {
     if (txt) paras.push(txt);
   }
   const aboutText = paras.map(t => `<p>${esc(t)}</p>`).join('\n');
-  const aboutBody = `<div class="about-hero">
-  <img class="about-bg" src="assets/banner/nebula.jpg" alt="">
-  <div class="halftone-overlay"></div>
-  <div class="hero-inner"><h1>ABOUT ME</h1></div>
-</div>
-<div class="avatar-row">
+  const aboutBody = `<div class="avatar-row">
   <div class="avatar-box"><img src="assets/icon.svg" alt="avatar"><span class="avatar-sticker">HELLO!</span></div>
   <div class="avatar-name">
     <div class="who">shibusama</div>
@@ -424,6 +432,7 @@ genWiki();
 genSearch();
 genWrite();
 genManual();
+genAssets();
 genData();
 console.log('Generated into public/');
 console.log('posts:', posts.length, '| wiki:', wiki.length);
