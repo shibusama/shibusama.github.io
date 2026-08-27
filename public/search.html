@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>第 4 页 · GEIST</title>
+<title>搜索 · GEIST</title>
 <meta name="description" content="GEIST — shibusama 的波普艺术风格博客">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -17,12 +17,12 @@
     <span class="starburst cyan">!</span>
   </div>
   <nav class="main-nav">
-    <a class="on" href="index.html">首页</a>
+    <a class="" href="index.html">首页</a>
     <a class="" href="archive.html">归档</a>
     <a class="" href="categories.html">分类</a>
     <a class="" href="tags.html">标签</a>
     <a class="" href="wiki.html">Wiki</a>
-    <a class="" href="search.html">搜索</a>
+    <a class="on" href="search.html">搜索</a>
     <a class="" href="write.html">写文章</a>
     <a class="" href="about.html">关于</a>
     <button class="theme-toggle" onclick="toggleTheme()" title="切换明暗主题">LIGHT/DARK</button>
@@ -41,28 +41,13 @@
     <span class="hero-tagline">POP ART BLOG · EST. 2002</span>
   </div>
 </div>
-<h1 class="page-title"><span class="starburst">★</span>LATEST POSTS</h1>
-<div class="page-desc">共 32 篇 · 第 4/4 页 · 波普能量加载中…</div>
-<div class="post-grid">
-<a class="post-card" href="post/%E8%A7%A3%E5%86%B3%E5%90%83%E7%9A%84%E9%97%AE%E9%A2%98.html">
-  <span class="cat-badge">生活</span>
-  <h2>解决吃的问题</h2>
-  <div class="excerpt">{ “水果”: [ “火龙果”, “菠萝”, “香蕉”, “苹果”, “橘子”, “葡萄”, “木枣” ], “聚餐”: [ “香锅”, “日韩料理”, “火锅”, “串串”, “…</div>
-  <div class="meta"><span class="date-badge">2002-12-24</span><span>#生活 #上海</span></div>
-</a>
-<a class="post-card" href="post/topic.html">
-  <span class="cat-badge">诗</span>
-  <h2>幻想被拯救？</h2>
-  <div class="excerpt">在现实生活中沉沦 又可以称之为命运 总会感觉伤口会愈合一样 也会相信入市抢劫这种奇迹最终会伤口愈合一样会发生身边 所以一个基本的伦理实践 那就是等 等所有都变成我想要的样子 基本不…</div>
-  <div class="meta"><span class="date-badge">2002-12-24</span><span>#诗</span></div>
-</a>
+<h1 class="page-title"><span class="starburst">★</span>SEARCH</h1>
+<div class="page-desc">站内搜索 · 输入关键词回车</div>
+<div class="search-box">
+  <input id="q" type="text" placeholder="搜点什么… 比如：哲学 / 恋爱 / 修辞" autofocus>
+  <button class="go" onclick="doSearch()">POP!</button>
 </div>
-<div class="pagination">
-<a href="index.html">1</a>
-<a href="page2.html">2</a>
-<a href="page3.html">3</a>
-<span class="cur">4</span>
-</div>
+<div id="results"></div>
 </main>
 <footer class="site-footer">
   <div class="dots">● ● ●</div>
